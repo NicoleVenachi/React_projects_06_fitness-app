@@ -20,6 +20,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
   const [isMenuToggled, setIsMenuToggled] = useState<boolean>(false);
   const isAboveMediumScreens = useMediaQuery("(min-width: 1060px)");
   const navbarBackground = isTopOfPage ? "" : "bg-primary-100 drop-shadow";
+  //basicamnete, si supera ese query o no, sera true or false. Sólo cuando hago scroll, mostrará el BG
 
   return (
     <nav>
@@ -65,9 +66,11 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
                 </div>
               </div>
             ) : (
+              // sino supera el query, ponemos el burguer button
               <button
                 className="rounded-full bg-secondary-500 p-2"
                 onClick={() => setIsMenuToggled(!isMenuToggled)}
+              // con click qiito o no toggle
               >
                 <Bars3Icon className="h-6 w-6 text-white" />
               </button>
@@ -76,7 +79,7 @@ const Navbar = ({ isTopOfPage, selectedPage, setSelectedPage }: Props) => {
         </div>
       </div>
 
-      {/* MOBILE MENU MODAL */}
+      {/* MOBILE MENU MODAL con Z */}
       {!isAboveMediumScreens && isMenuToggled && (
         <div className="fixed right-0 bottom-0 z-40 h-full w-[300px] bg-primary-100 drop-shadow-xl">
           {/* CLOSE ICON */}

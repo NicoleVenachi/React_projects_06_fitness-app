@@ -1,5 +1,5 @@
 import Navbar from "@/scenes/navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import { SelectedPage } from "./shared/types";
 
@@ -9,6 +9,19 @@ function App() {
     SelectedPage.Home
   ); //state para el page selector
   const [isTopOfPage, setIsTopOfPage] = useState<boolean>(true);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY === 0) {
+        setIsTopOfPage(true);
+        setSelectedPage(SelectedPage.Home);
+      }
+      if (window.scrollY !== 0) setIsTopOfPage(false);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []); //eseeffect para leer scroll, y si estoy en 0, aviso que estoy en top, y tomo como setSelected el Home. Y, solo si hago scroll, y no estoy en top, mostara un BG de estilo
+
 
 
   return (
